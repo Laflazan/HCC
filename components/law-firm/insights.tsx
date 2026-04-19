@@ -3,33 +3,12 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getArticles, getDictionary, getPath, type Locale } from "@/lib/site";
 
-function ArticlePreviewAction({
-  href,
-  label,
-}: {
-  href?: string;
-  label: string;
-}) {
-  if (!href) {
-    return (
-      <span
-        aria-disabled="true"
-        className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-foreground/70"
-      >
-        {label}
-        <ArrowRight className="h-4 w-4" />
-      </span>
-    );
-  }
-
+function ArticlePreviewAction({ label }: { label: string }) {
   return (
-    <Link
-      href={href}
-      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-gold transition-colors"
-    >
+    <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors group-hover:text-gold">
       {label}
       <ArrowRight className="h-4 w-4" />
-    </Link>
+    </span>
   );
 }
 
@@ -64,8 +43,9 @@ export function Insights({ locale }: { locale: Locale }) {
 
         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {articles.slice(0, 4).map((article) => (
-            <article
+            <Link
               key={article.title}
+              href={article.href}
               className="group border border-border bg-background p-6 transition-all duration-300 hover:border-gold/30 hover:shadow-lg"
             >
               <div className="relative mb-4 h-40 w-full overflow-hidden bg-muted">
@@ -79,22 +59,15 @@ export function Insights({ locale }: { locale: Locale }) {
               </div>
 
               <h3 className="font-serif text-lg font-medium leading-tight text-foreground transition-colors group-hover:text-gold">
-                {article.href ? (
-                  <Link href={article.href}>{article.title}</Link>
-                ) : (
-                  <span>{article.title}</span>
-                )}
+                {article.title}
               </h3>
 
               <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
                 {article.excerpt}
               </p>
 
-              <ArticlePreviewAction
-                href={article.href}
-                label={dictionary.insights.readMore}
-              />
-            </article>
+              <ArticlePreviewAction label={dictionary.insights.readMore} />
+            </Link>
           ))}
         </div>
       </div>

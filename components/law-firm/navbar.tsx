@@ -30,11 +30,16 @@ function LanguageToggle({
     <Button
       asChild
       variant="outline"
-      className={`border-gold bg-transparent text-foreground transition-all duration-300 hover:bg-gold hover:text-primary-foreground ${className ?? ""}`}
+      className={`h-11 rounded-none border-gold bg-transparent px-5 text-foreground transition-all duration-300 hover:bg-gold/10 hover:text-foreground ${className ?? ""}`}
     >
-      <Link href={href} aria-label={ariaLabel} onClick={onClick}>
+      <Link
+        href={href}
+        aria-label={ariaLabel}
+        onClick={onClick}
+        className="flex items-center"
+      >
         <span className={currentLocale === "tr" ? "text-gold" : ""}>TR</span>
-        <span className="px-1 opacity-60">/</span>
+        <span className="px-2 text-foreground/50">/</span>
         <span className={currentLocale === "en" ? "text-gold" : ""}>EN</span>
       </Link>
     </Button>
@@ -69,6 +74,8 @@ export function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -97,11 +104,10 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500
-      ${
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "border-b border-gold/20 bg-background/95 py-2 shadow-[0_8px_30px_rgba(0,0,0,0.3)] backdrop-blur-xl"
-          : "border-b border-transparent bg-background/70 py-3 backdrop-blur-md"
+          ? "border-b border-black/8 bg-white/96 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur-xl"
+          : "border-b border-black/6 bg-white/92 py-4 backdrop-blur-md"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
@@ -112,10 +118,9 @@ export function Navbar() {
               alt={locale === "tr" ? "HCC Avukatlık Bürosu" : "HCC Law Office"}
               width={200}
               height={60}
-              className={`w-auto object-contain transition-all duration-500
-              ${
-                scrolled ? "h-12" : "h-16"
-              } group-hover:scale-[1.03] drop-shadow-[0_0_12px_rgba(200,169,106,0.25)]`}
+              className={`w-auto object-contain transition-all duration-500 ${
+                scrolled ? "h-10" : "h-12"
+              } group-hover:scale-[1.02]`}
               priority
             />
           </Link>
@@ -124,7 +129,7 @@ export function Navbar() {
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground transition hover:bg-muted"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground transition hover:bg-black/5"
             onClick={() => setMobileMenuOpen(true)}
             aria-label={dictionary.navbar.openMenu}
             aria-expanded={mobileMenuOpen}
@@ -139,10 +144,10 @@ export function Navbar() {
             <Link
               key={item.name}
               href={item.href}
-              className={`relative text-sm font-medium tracking-[0.02em] transition-all duration-300 ${
+              className={`group relative text-sm font-medium tracking-[0.02em] transition-colors duration-300 ${
                 isActive(item.href)
                   ? "text-gold"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-foreground/65 hover:text-foreground"
               }`}
             >
               {item.name}
@@ -150,23 +155,24 @@ export function Navbar() {
                 className={`absolute -bottom-2 left-0 h-[2px] bg-gold transition-all duration-300 ${
                   isActive(item.href)
                     ? "w-full opacity-100"
-                    : "w-0 opacity-0 group-hover:w-full"
+                    : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
                 }`}
               />
             </Link>
           ))}
         </div>
 
-        <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-3">
+        <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-4">
           <LanguageToggle
             href={languageHref}
             currentLocale={locale}
             ariaLabel={dictionary.language.toggleLabel}
           />
+
           <Button
             asChild
             variant="outline"
-            className="border-gold bg-transparent text-foreground shadow-[0_0_0px_rgba(200,169,106,0.0)] transition-all duration-300 hover:bg-gold hover:text-primary-foreground hover:shadow-[0_0_20px_rgba(200,169,106,0.25)]"
+            className="h-11 rounded-none border-gold bg-transparent px-6 text-foreground transition-all duration-300 hover:bg-gold/10 hover:text-foreground"
           >
             <Link href={getPath(locale, "contact")}>
               {dictionary.navbar.contactCta}
@@ -178,10 +184,10 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div id="mobile-navigation" className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/35 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed inset-y-0 right-0 w-full max-w-sm border-l border-border bg-background px-6 py-6 shadow-2xl">
+          <div className="fixed inset-y-0 right-0 w-full max-w-sm border-l border-black/10 bg-white px-6 py-6 shadow-2xl">
             <div className="flex items-center justify-between">
               <Link
                 href={getPath(locale, "home")}
@@ -190,11 +196,13 @@ export function Navbar() {
                 <Image
                   src="/HCC_LOGO-removebg-preview.png"
                   alt={
-                    locale === "tr" ? "HCC Avukatlık Bürosu logosu" : "HCC Law Office logo"
+                    locale === "tr"
+                      ? "HCC Avukatlık Bürosu logosu"
+                      : "HCC Law Office logo"
                   }
                   width={160}
                   height={50}
-                  className="h-14 w-auto"
+                  className="h-12 w-auto"
                 />
               </Link>
 
@@ -202,6 +210,7 @@ export function Navbar() {
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
                 aria-label={dictionary.navbar.closeMenu}
+                className="rounded-md p-2 text-foreground transition hover:bg-black/5"
               >
                 <X className="h-6 w-6" />
               </button>
@@ -214,7 +223,9 @@ export function Navbar() {
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block rounded-xl px-4 py-3 text-base font-medium transition ${
-                    isActive(item.href) ? "bg-gold/10 text-gold" : "hover:bg-muted"
+                    isActive(item.href)
+                      ? "bg-gold/10 text-gold"
+                      : "text-foreground/80 hover:bg-black/5 hover:text-foreground"
                   }`}
                 >
                   {item.name}
@@ -232,7 +243,7 @@ export function Navbar() {
               />
               <Button
                 asChild
-                className="w-full bg-gold text-primary-foreground hover:bg-gold/90"
+                className="h-11 w-full bg-gold text-primary-foreground hover:bg-gold/90"
               >
                 <Link
                   href={getPath(locale, "contact")}

@@ -88,19 +88,23 @@ export function Contact({ locale }: { locale: Locale }) {
         <img
           src="/contact-bg.png"
           alt={locale === "tr" ? "HCC Avukatlık Bürosu" : "HCC Law Office"}
-          className="h-full w-full object-cover opacity-25"
+          className="h-full w-full scale-105 object-cover opacity-55"
         />
       </div>
 
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/50 via-black/28 to-black/45" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/35 via-transparent to-black/20" />
+      <div className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-gold/12 blur-[120px]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] bg-[linear-gradient(0deg,transparent_24%,rgba(255,255,255,0.05)_25%,rgba(255,255,255,0.05)_26%,transparent_27%,transparent_74%,rgba(255,255,255,0.05)_75%,rgba(255,255,255,0.05)_76%,transparent_77%,transparent),linear-gradient(90deg,transparent_24%,rgba(255,255,255,0.05)_25%,rgba(255,255,255,0.05)_26%,transparent_27%,transparent_74%,rgba(255,255,255,0.05)_75%,rgba(255,255,255,0.05)_76%,transparent_77%,transparent)] bg-[length:60px_60px]" />
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid gap-16 lg:grid-cols-2">
+        <div className="grid items-start gap-16 lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, y: 35 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="max-w-xl"
           >
             <div className="mb-8 h-px w-16 bg-gold" />
 
@@ -109,7 +113,7 @@ export function Contact({ locale }: { locale: Locale }) {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
               viewport={{ once: true }}
-              className="font-serif text-4xl font-medium tracking-tight text-white md:text-5xl"
+              className="font-serif text-4xl font-medium leading-tight tracking-tight text-white md:text-5xl"
             >
               {dictionary.contact.title}
             </motion.h2>
@@ -119,7 +123,7 @@ export function Contact({ locale }: { locale: Locale }) {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
-              className="mt-6 text-lg leading-relaxed text-white/80"
+              className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85"
             >
               {dictionary.contact.description}
             </motion.p>
@@ -131,13 +135,13 @@ export function Contact({ locale }: { locale: Locale }) {
               viewport={{ once: true }}
               className="mt-10 space-y-6"
             >
-              <div className="flex items-start gap-4">
-                <MapPin className="mt-1 h-5 w-5 text-gold" />
+              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 px-5 py-4 backdrop-blur-[2px]">
+                <MapPin className="mt-1 h-5 w-5 shrink-0 text-gold" />
                 <div>
-                  <p className="text-sm uppercase tracking-wider text-white/60">
+                  <p className="text-sm uppercase tracking-[0.18em] text-white/60">
                     {dictionary.contact.addressLabel}
                   </p>
-                  <p className="mt-1 text-white">
+                  <p className="mt-2 text-base leading-relaxed text-white">
                     {dictionary.contact.address.map((line) => (
                       <span key={line} className="block">
                         {line}
@@ -147,33 +151,33 @@ export function Contact({ locale }: { locale: Locale }) {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <Phone className="mt-1 h-5 w-5 text-gold" />
+              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 px-5 py-4 backdrop-blur-[2px]">
+                <Phone className="mt-1 h-5 w-5 shrink-0 text-gold" />
                 <div>
-                  <p className="text-sm uppercase tracking-wider text-white/60">
+                  <p className="text-sm uppercase tracking-[0.18em] text-white/60">
                     {dictionary.contact.phoneLabel}
                   </p>
-                  <p className="mt-1 text-white">{dictionary.contact.phone}</p>
+                  <p className="mt-2 text-base text-white">{dictionary.contact.phone}</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <Mail className="mt-1 h-5 w-5 text-gold" />
+              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 px-5 py-4 backdrop-blur-[2px]">
+                <Mail className="mt-1 h-5 w-5 shrink-0 text-gold" />
                 <div>
-                  <p className="text-sm uppercase tracking-wider text-white/60">
+                  <p className="text-sm uppercase tracking-[0.18em] text-white/60">
                     {dictionary.contact.emailLabel}
                   </p>
-                  <p className="mt-1 text-white">{dictionary.contact.email}</p>
+                  <p className="mt-2 text-base text-white">{dictionary.contact.email}</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <Clock className="mt-1 h-5 w-5 text-gold" />
+              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 px-5 py-4 backdrop-blur-[2px]">
+                <Clock className="mt-1 h-5 w-5 shrink-0 text-gold" />
                 <div>
-                  <p className="text-sm uppercase tracking-wider text-white/60">
+                  <p className="text-sm uppercase tracking-[0.18em] text-white/60">
                     {dictionary.contact.hoursLabel}
                   </p>
-                  <p className="mt-1 text-white">{dictionary.contact.hours}</p>
+                  <p className="mt-2 text-base text-white">{dictionary.contact.hours}</p>
                 </div>
               </div>
             </motion.div>
@@ -184,13 +188,13 @@ export function Contact({ locale }: { locale: Locale }) {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur-md lg:p-12"
+            className="rounded-3xl border border-white/15 bg-white/10 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-lg lg:p-12"
           >
-            <h3 className="font-serif text-2xl font-medium text-white">
+            <h3 className="font-serif text-2xl font-medium text-white md:text-3xl">
               {dictionary.contact.formTitle}
             </h3>
 
-            <p className="mt-2 text-white/70">{dictionary.contact.formDescription}</p>
+            <p className="mt-3 text-white/72">{dictionary.contact.formDescription}</p>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-6" noValidate>
               <div>
@@ -200,7 +204,7 @@ export function Contact({ locale }: { locale: Locale }) {
                 <Input
                   type="text"
                   required
-                  className="mt-2 border-white/20 bg-white/10 text-white placeholder:text-white/50"
+                  className="mt-2 h-12 border-white/20 bg-white/10 text-white placeholder:text-white/45 focus:border-gold/60 focus:ring-0"
                   value={formData.name}
                   onChange={(event) =>
                     setFormData({ ...formData, name: event.target.value })
@@ -220,7 +224,7 @@ export function Contact({ locale }: { locale: Locale }) {
                 <Input
                   type="email"
                   required
-                  className="mt-2 border-white/20 bg-white/10 text-white placeholder:text-white/50"
+                  className="mt-2 h-12 border-white/20 bg-white/10 text-white placeholder:text-white/45 focus:border-gold/60 focus:ring-0"
                   value={formData.email}
                   onChange={(event) =>
                     setFormData({ ...formData, email: event.target.value })
@@ -239,7 +243,7 @@ export function Contact({ locale }: { locale: Locale }) {
                 </label>
                 <Input
                   type="text"
-                  className="mt-2 border-white/20 bg-white/10 text-white placeholder:text-white/50"
+                  className="mt-2 h-12 border-white/20 bg-white/10 text-white placeholder:text-white/45 focus:border-gold/60 focus:ring-0"
                   value={formData.company}
                   onChange={(event) =>
                     setFormData({ ...formData, company: event.target.value })
@@ -254,7 +258,7 @@ export function Contact({ locale }: { locale: Locale }) {
                 <Textarea
                   required
                   rows={5}
-                  className="mt-2 resize-none border-white/20 bg-white/10 text-white placeholder:text-white/50"
+                  className="mt-2 min-h-[140px] resize-none border-white/20 bg-white/10 text-white placeholder:text-white/45 focus:border-gold/60 focus:ring-0"
                   value={formData.message}
                   onChange={(event) =>
                     setFormData({ ...formData, message: event.target.value })
@@ -271,7 +275,7 @@ export function Contact({ locale }: { locale: Locale }) {
                 type="submit"
                 size="lg"
                 disabled={formState.status === "submitting"}
-                className="w-full bg-white text-black hover:bg-white/90"
+                className="h-12 w-full bg-white text-black transition hover:bg-white/90"
               >
                 {formState.status === "submitting"
                   ? dictionary.contact.submitting
@@ -290,7 +294,7 @@ export function Contact({ locale }: { locale: Locale }) {
                 </p>
               )}
 
-              <p className="text-center text-xs text-white/50">
+              <p className="text-center text-xs leading-relaxed text-white/50">
                 {dictionary.contact.consent}
               </p>
             </form>

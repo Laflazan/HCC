@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  getAllArticles as getLocalizedArticles,
+  getFeaturedArticle as getLocalizedFeaturedArticle,
+  translateArticlePath,
+} from "@/lib/articles";
 
 export type Locale = "tr" | "en";
 export type RouteKey =
@@ -66,6 +71,12 @@ export function switchLocalePath(pathname: string, targetLocale: Locale) {
   if (matchedEntry) {
     const [, localizedPaths] = matchedEntry;
     return localizedPaths[targetLocale];
+  }
+
+  const translatedArticlePath = translateArticlePath(pathname, targetLocale);
+
+  if (translatedArticlePath) {
+    return translatedArticlePath;
   }
 
   if (targetLocale === "en") {
@@ -1065,11 +1076,11 @@ export function getDictionary(locale: Locale) {
 }
 
 export function getArticles(locale: Locale) {
-  return getDictionary(locale).insights.articles;
+  return getLocalizedArticles(locale);
 }
 
 export function getFeaturedArticle(locale: Locale) {
-  return getDictionary(locale).insights.featured;
+  return getLocalizedFeaturedArticle(locale);
 }
 
 export function getTeamMembers(locale: Locale) {
