@@ -18,7 +18,7 @@ export function Insights({ locale }: { locale: Locale }) {
 
   return (
     <section id="insights" className="bg-secondary py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="mb-8 h-px w-16 bg-gold" />
@@ -58,7 +58,7 @@ export function Insights({ locale }: { locale: Locale }) {
                 />
               </div>
 
-              <h3 className="font-serif text-lg font-medium leading-tight text-foreground transition-colors group-hover:text-gold">
+              <h3 className="font-serif text-lg font-medium leading-tight text-foreground transition-colors group-hover:text-gold [overflow-wrap:anywhere]">
                 {article.title}
               </h3>
 

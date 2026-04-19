@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  getRelatedArticles,
-  type ArticleDetail,
-} from "@/lib/articles";
+import { getRelatedArticles, type ArticleDetail } from "@/lib/articles";
 import { getPath, type Locale } from "@/lib/site";
+
+const SITE_URL = "https://hcc.av.tr";
 
 export function ArticleDetailPage({
   article,
@@ -16,11 +15,39 @@ export function ArticleDetailPage({
   const backLabel = locale === "tr" ? "Makalelere Dön" : "Back to Articles";
   const relatedLabel = locale === "tr" ? "Diğer Makaleler" : "Other Articles";
   const summaryLabel = locale === "tr" ? "Kısa Özet" : "Summary";
+  const authorLabel = locale === "tr" ? "Yazar" : "Author";
   const relatedArticles = getRelatedArticles(locale, article.slug, 3);
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.seoDescription,
+    image: `${SITE_URL}${article.image}`,
+    datePublished: article.publishedAt,
+    dateModified: article.publishedAt,
+    author: {
+      "@type": "Organization",
+      name: article.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: locale === "tr" ? "HCC Avukatlık Bürosu" : "HCC Law Office",
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/HCC_LOGO-removebg-preview.png`,
+      },
+    },
+    mainEntityOfPage: `${SITE_URL}${article.href}`,
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-gold/30 selection:text-foreground">
-      <div className="mx-auto max-w-[1440px] px-6 pb-24 pt-6 md:px-10 xl:px-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+
+      <div className="mx-auto max-w-[1440px] px-4 pb-24 pt-6 sm:px-6 md:px-10 xl:px-12">
         <article className="mx-auto max-w-5xl">
           <header className="border-b border-border pb-10 md:pb-12">
             <Link
@@ -32,20 +59,23 @@ export function ArticleDetailPage({
             </Link>
 
             <div className="max-w-4xl">
-              <div className="mb-5 flex flex-wrap items-center gap-3">
+              <div className="mb-5 flex flex-wrap items-start gap-3">
                 <span className="inline-block rounded-sm border border-gold/25 bg-gold/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-gold">
                   {article.category}
                 </span>
                 <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                   {article.date}
                 </span>
+                <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                  {authorLabel}: {article.author}
+                </span>
               </div>
 
-              <h1 className="font-serif text-4xl leading-[1.04] tracking-[-0.03em] text-foreground md:text-6xl xl:text-[72px]">
+              <h1 className="font-serif text-3xl leading-[1.04] tracking-[-0.03em] text-foreground [overflow-wrap:anywhere] sm:text-4xl md:text-6xl xl:text-[72px]">
                 {article.title}
               </h1>
 
-              <p className="mt-6 max-w-3xl text-[16px] leading-8 text-muted-foreground md:text-[17px]">
+              <p className="mt-6 max-w-3xl text-[15px] leading-8 text-muted-foreground [overflow-wrap:anywhere] md:text-[17px]">
                 {article.introduction}
               </p>
             </div>
@@ -70,7 +100,7 @@ export function ArticleDetailPage({
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">
                 {summaryLabel}
               </p>
-              <p className="mt-4 text-[15px] leading-8 text-muted-foreground md:text-base">
+              <p className="mt-4 text-[15px] leading-8 text-muted-foreground [overflow-wrap:anywhere] md:text-base">
                 {article.excerpt}
               </p>
             </div>
@@ -81,20 +111,35 @@ export function ArticleDetailPage({
                   {section.heading ? (
                     <>
                       <div className="mb-5 h-px w-14 bg-gold" />
-                      <h2 className="font-serif text-3xl leading-tight tracking-[-0.02em] text-foreground">
+                      <h2 className="font-serif text-[28px] leading-tight tracking-[-0.02em] text-foreground [overflow-wrap:anywhere] sm:text-3xl">
                         {section.heading}
                       </h2>
+                      {section.subheading ? (
+                        <p className="mt-3 text-sm uppercase tracking-[0.18em] text-muted-foreground">
+                          {section.subheading}
+                        </p>
+                      ) : null}
                     </>
                   ) : null}
 
                   <div
-                    className={`space-y-5 text-[15px] leading-8 text-muted-foreground md:text-base ${
+                    className={`space-y-5 text-[15px] leading-8 text-muted-foreground [overflow-wrap:anywhere] md:text-base ${
                       section.heading ? "mt-5" : ""
                     }`}
                   >
                     {section.paragraphs.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
+
+                    {section.bullets?.length ? (
+                      <ul className="space-y-3 pl-5">
+                        {section.bullets.map((bullet) => (
+                          <li key={bullet} className="list-disc marker:text-gold">
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
                   </div>
                 </section>
               ))}
@@ -138,7 +183,7 @@ export function ArticleDetailPage({
                       </span>
                     </div>
 
-                    <h3 className="font-serif text-[28px] leading-[1.16] tracking-[-0.02em] text-foreground transition-colors group-hover:text-gold">
+                    <h3 className="font-serif text-2xl leading-[1.16] tracking-[-0.02em] text-foreground transition-colors group-hover:text-gold [overflow-wrap:anywhere] sm:text-[28px]">
                       {relatedArticle.title}
                     </h3>
 

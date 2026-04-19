@@ -15,6 +15,8 @@ export type RouteKey =
   | "contact";
 
 const SITE_URL = "https://hcc.av.tr";
+export const LINKEDIN_COMPANY_URL =
+  "https://www.linkedin.com/company/hcc-avukatlık-bürosu/";
 
 export const routeMap: Record<RouteKey, Record<Locale, string>> = {
   home: {
@@ -108,6 +110,12 @@ type TeamMember = {
   longDescription: string;
   expertise: string[];
   email?: string;
+  officePhone?: string;
+  mobilePhone?: string;
+  education?: string;
+  languages?: string[];
+  birthInfo?: string;
+  startYear?: string;
 };
 
 type ArticleItem = {
@@ -226,6 +234,12 @@ type SiteDictionary = {
       messageMax: string;
     };
   };
+  cookieBanner: {
+    message: string;
+    accept: string;
+    reject: string;
+    details?: string;
+  };
   footer: {
     summary: string;
     servicesTitle: string;
@@ -340,66 +354,68 @@ export const siteContent: Record<Locale, SiteDictionary> = {
       title: "Hizmet Alanlarımız",
       description:
         "HCC Avukatlık Bürosu, müvekkillerine geniş kapsamlı hukuki danışmanlık ve avukatlık hizmetleri sunmaktadır. Farklı hukuk alanlarında uzmanlaşmış ekibimizle, her ihtiyaca özel stratejik çözümler üretmekteyiz.",
+      
+      
       items: [
         {
           title: "Aile ve Miras Hukuku",
           description:
-            "Miras planlaması, paylaşım ve aile hukukuna ilişkin uyuşmazlıklarda kapsamlı danışmanlık ve temsil.",
+            "Aile hukuku uyu\u015fmazl\u0131klar\u0131, miras planlamas\u0131, tereke payla\u015f\u0131m\u0131 ve miras\u0131n intikali s\u00fcre\u00e7lerinde m\u00fcvekkillere \u00f6zenli, gizlili\u011fe duyarl\u0131 ve sonu\u00e7 odakl\u0131 hukuki destek sunuyoruz.",
         },
         {
-          title: "Bilgi Teknolojileri ve İnternet Hukuku",
+          title: "Bilgi Teknolojileri ve \u0130nternet Hukuku",
           description:
-            "E-ticaret, dijital platformlar ve bilişim hukuku kapsamında sözleşmeler ve hukuki süreç yönetimi.",
+            "E-ticaret, dijital platformlar, yaz\u0131l\u0131m s\u00f6zle\u015fmeleri, i\u00e7erik sorumlulu\u011fu ve \u00e7evrimi\u00e7i ticari faaliyetlere ili\u015fkin hukuki s\u00fcre\u00e7lerde g\u00fcncel mevzuata uygun dan\u0131\u015fmanl\u0131k sa\u011fl\u0131yoruz.",
         },
         {
-          title: "Dava Takibi ve Uyuşmazlık Çözümü",
+          title: "Dava Takibi ve Uyu\u015fmazl\u0131k \u00c7\u00f6z\u00fcm\u00fc",
           description:
-            "Ticari, idari ve özel hukuk alanlarında dava takibi ve stratejik uyuşmazlık çözümü.",
+            "Ticari, idari ve \u00f6zel hukuk uyu\u015fmazl\u0131klar\u0131nda dava \u00f6ncesi de\u011ferlendirme, dava takibi ve alternatif \u00e7\u00f6z\u00fcm yollar\u0131n\u0131 birlikte ele alan stratejik temsil hizmeti sunuyoruz.",
         },
         {
-          title: "Fikri Mülkiyet Hukuku",
+          title: "Fikri M\u00fclkiyet Hukuku",
           description:
-            "Marka, patent ve telif haklarının korunması ve ihlallerin önlenmesine yönelik hukuki hizmetler.",
+            "Marka, patent, tasar\u0131m ve telif haklar\u0131n\u0131n korunmas\u0131, lisans s\u00f6zle\u015fmeleri ile hak ihlallerine kar\u015f\u0131 \u00f6nleyici ve koruyucu hukuki \u00e7\u00f6z\u00fcmler geli\u015ftiriyoruz.",
         },
         {
           title: "Gayrimenkul Hukuku",
           description:
-            "Taşınmaz işlemleri, proje geliştirme ve kira ilişkilerine dair hukuki danışmanlık.",
+            "Ta\u015f\u0131nmaz al\u0131m sat\u0131m\u0131, kira ili\u015fkileri, proje geli\u015ftirme s\u00fcre\u00e7leri ve tapu i\u015flemlerine ili\u015fkin hukuki riskleri \u00f6ng\u00f6ren kapsaml\u0131 dan\u0131\u015fmanl\u0131k hizmeti veriyoruz.",
         },
         {
-          title: "İcra ve İflas Hukuku",
+          title: "\u0130cra ve \u0130flas Hukuku",
           description:
-            "Alacak tahsili, icra takipleri ve iflas süreçlerinin etkin yönetimi.",
+            "Alacak tahsili, icra takipleri, konkordato ve iflas s\u00fcre\u00e7lerinde m\u00fcvekkillerin hak ve menfaatlerini korumaya y\u00f6nelik etkin ve sistematik hukuki temsil sunuyoruz.",
         },
         {
-          title: "İş Hukuku",
+          title: "\u0130\u015f Hukuku",
           description:
-            "İşçi-işveren ilişkileri, sözleşmeler ve iş uyuşmazlıklarında hukuki destek.",
+            "\u0130\u015f s\u00f6zle\u015fmeleri, i\u015fyeri uygulamalar\u0131, fesih s\u00fcre\u00e7leri ve i\u015f\u00e7i-i\u015fveren uyu\u015fmazl\u0131klar\u0131nda i\u015f hayat\u0131n\u0131n ihtiya\u00e7lar\u0131na uygun hukuki destek sa\u011fl\u0131yoruz.",
         },
         {
-          title: "Kişisel Verilerin Korunması",
+          title: "Ki\u015fisel Verilerin Korunmas\u0131",
           description:
-            "KVKK uyum süreçleri, veri güvenliği ve hukuki risk yönetimi.",
+            "KVKK uyum s\u00fcre\u00e7leri, veri i\u015fleme faaliyetlerinin de\u011ferlendirilmesi, ayd\u0131nlatma ve saklama politikalar\u0131 ile veri g\u00fcvenli\u011fine ili\u015fkin hukuki risk y\u00f6netimi sunuyoruz.",
         },
         {
-          title: "Mali ve Beyaz Yaka Suçları",
+          title: "Mali ve Beyaz Yaka Su\u00e7lar\u0131",
           description:
-            "Finansal suçlar ve ceza soruşturmalarında savunma ve danışmanlık.",
+            "Mali nitelikli su\u00e7lar, \u015firket y\u00f6neticilerine y\u00f6nelik soru\u015fturmalar ve beyaz yaka ceza dosyalar\u0131nda dikkatli, teknik ve itibari riskleri g\u00f6zeten savunma hizmeti veriyoruz.",
         },
         {
-          title: "Ticaret ve Şirketler Hukuku",
+          title: "Ticaret ve \u015eirketler Hukuku",
           description:
-            "Şirket kuruluşları, birleşme ve devralmalar (M&A) ve ticari sözleşmeler.",
+            "\u015eirket kurulu\u015flar\u0131, kurumsal yap\u0131land\u0131rmalar, pay devri, birle\u015fme ve devralmalar ile ticari s\u00f6zle\u015fmelerin haz\u0131rlanmas\u0131nda stratejik hukuki dan\u0131\u015fmanl\u0131k sunuyoruz.",
         },
         {
-          title: "Tüketici Hukuku",
+          title: "T\u00fcketici Hukuku",
           description:
-            "Tüketici uyuşmazlıkları ve sözleşmelere ilişkin hukuki danışmanlık.",
+            "T\u00fcketici i\u015flemleri, sat\u0131\u015f ve hizmet s\u00f6zle\u015fmeleri ile ay\u0131pl\u0131 mal ve hizmetten kaynaklanan uyu\u015fmazl\u0131klarda dengeli ve \u00e7\u00f6z\u00fcm odakl\u0131 hukuki destek sa\u011fl\u0131yoruz.",
         },
         {
           title: "Vergi ve Mali Hizmetler",
           description:
-            "Vergi ihtilafları ve mali süreçlere ilişkin hukuki çözümler.",
+            "Vergi uyu\u015fmazl\u0131klar\u0131, mali y\u00fck\u00fcm\u00fcl\u00fcklerin de\u011ferlendirilmesi ve idari ba\u015fvuru s\u00fcre\u00e7lerinde teknik boyutu g\u00fc\u00e7l\u00fc hukuki \u00e7\u00f6z\u00fcmler geli\u015ftiriyoruz.",
         },
       ],
     },
@@ -424,66 +440,83 @@ export const siteContent: Record<Locale, SiteDictionary> = {
       closeProfile: "Profili kapat",
       profileLinkSoon: "Profil bağlantısı eklenecek",
       members: [
-        {
-          name: "Hasan Can Cebeci",
-          role: "Avukat",
-          image: "/hasan.png",
-          description:
-            "Bireysel ve kurumsal müvekkillere yönelik hukuki süreçlerde stratejik, titiz ve çözüm odaklı danışmanlık sunmaktadır.",
-          longDescription:
-            "Hasan Can Cebeci, bireysel ve kurumsal müvekkillere yönelik hukuki süreçlerde stratejik analiz ve sonuç odaklı temsil anlayışıyla çalışmalarını sürdürmektedir.",
-          expertise: [
-            "Hukuki Danışmanlık",
-            "Dava Takibi",
-            "Stratejik Süreç Yönetimi",
-          ],
-          email: "info@hcc.av.tr",
-        },
-        {
-          name: "Gerçek Onur Oy",
-          role: "Avukat",
-          image: "/onur.png",
-          description:
-            "Uyuşmazlık çözümü, hukuki danışmanlık ve dava süreçlerinin etkin şekilde yönetilmesi alanlarında çalışmalar yürütmektedir.",
-          longDescription:
-            "Uyuşmazlık çözümü ve dava süreçlerinde analitik yaklaşımı ile müvekkillerine güven veren bir temsil sunmaktadır.",
-          expertise: ["Uyuşmazlık Çözümü", "Hukuki İnceleme"],
-          email: "info@hcc.av.tr",
-        },
-        {
-          name: "Osman Oy",
-          role: "Avukat",
-          image: "/osmann.png",
-          description:
-            "Hukuki risklerin önceden tespiti ve müvekkil menfaatlerinin korunmasına yönelik sistematik bir yaklaşım benimser.",
-          longDescription:
-            "Risk analizi ve önleyici hukuk alanında uzmanlaşmış olup süreçleri planlı şekilde yönetir.",
-          expertise: ["Risk Analizi", "Önleyici Hukuk"],
-          email: "info@hcc.av.tr",
-        },
-        {
-          name: "M. Batuhan Çelik",
-          role: "Stajyer Avukat",
-          image: "/batuhan.png",
-          description:
-            "Araştırma ve dosya hazırlığı konularında ekibe destek sağlar.",
-          longDescription:
-            "Hukuki araştırma ve operasyonel süreçlerde disiplinli çalışmasıyla katkı sağlar.",
-          expertise: ["Araştırma", "Dosya Hazırlığı"],
-          email: "info@hcc.av.tr",
-        },
-        {
-          name: "Zümra Miray Feyzi",
-          role: "Stajyer Avukat",
-          image: "/zumra.png",
-          description:
-            "Dokümantasyon ve hukuki inceleme süreçlerinde destek sağlar.",
-          longDescription:
-            "Ofis içi operasyonlarda düzenli ve dikkatli çalışmasıyla sürece katkı sunar.",
-          expertise: ["Dokümantasyon", "Hukuki İnceleme"],
-          email: "info@hcc.av.tr",
-        },
-      ],
+  {
+    name: "Hasan Can Cebeci",
+    role: "Kurucu ve Yönetici Avukat",
+    description: "Bireysel ve kurumsal müvekkillere danışmanlık ve dava süreçlerinde stratejik hukuki çözümler sunmaktadır.",
+    longDescription: "Av. Hasan Can Cebeci, bireysel ve kurumsal müvekkillere yönelik hukuki danışmanlık, uyuşmazlık çözümü ve dava takibi alanlarında kapsamlı hizmet sunmaktadır. Özellikle ticaret ve şirketler hukuku başta olmak üzere, farklı hukuk disiplinlerinde stratejik süreç yönetimi ile müvekkillerine etkin ve sonuç odaklı çözümler sağlamaktadır.",
+    expertise: [
+      "Ticaret ve Şirketler Hukuku",
+      "İcra ve İflas Hukuku",
+      "Gayrimenkul Hukuku",
+      "İş Hukuku",
+      "Aile ve Miras Hukuku"
+    ],
+    image: "/hasan.png",
+    email: "can.cebeci@hcc.av.tr",
+    officePhone: "0212 216 07 24"
+  },
+  {
+    name: "Gerçek Onur Oy",
+    role: "Avukat",
+    description: "Bireysel ve kurumsal müvekkillere danışmanlık ve dava süreçlerinde etkin hukuki çözümler sunmaktadır.",
+    longDescription: "Av. Gerçek Onur Oy, bireysel ve kurumsal müvekkillere yönelik hukuki danışmanlık, uyuşmazlık çözümü ve dava takibi alanlarında faaliyet göstermektedir.",
+    expertise: [
+      "Aile Hukuku",
+      "Gayrimenkul Hukuku",
+      "Borçlar Hukuku",
+      "İcra ve İflas Hukuku",
+      "Ticaret ve Şirketler Hukuku"
+    ],
+    image: "/onur.png",
+    email: "gercek.oy@hcc.av.tr",
+    officePhone: "0212 216 07 24"
+  },
+  {
+    name: "Osman Oy",
+    role: "Avukat",
+    description: "Uzun yıllara dayanan mesleki tecrübesiyle hukuk, finans ve gayrimenkul alanlarında danışmanlık sunmaktadır.",
+    longDescription: "Av. Osman Oy, 1974 yılından bu yana avukatlık mesleğini sürdürmekte olup, hukuk, finans ve gayrimenkul alanlarında müvekkillerine danışmanlık hizmeti sunmaktadır.",
+    expertise: [
+      "Hukuk",
+      "Finans",
+      "Gayrimenkul Danışmanlığı"
+    ],
+    image: "/osmann.png",
+    email: "",
+    officePhone: "0212 216 07 24",
+    startYear: "1974"
+  },
+  {
+    name: "M. Batuhan Çelik",
+    role: "Stajyer Avukat",
+    description: "Çeşitli özel hukuk alanlarında uyuşmazlık çözümü ve dava süreçlerinde çalışmalarını sürdürmektedir.",
+    longDescription: "Stajyer Avukat Muhammed Batuhan Çelik, ceza hukuku, aile hukuku ve icra-iflas hukuku başta olmak üzere çeşitli alanlarda çalışmalarına devam etmektedir.",
+    expertise: [
+      "Ceza Hukuku",
+      "Aile Hukuku",
+      "Miras Hukuku",
+      "İcra ve İflas Hukuku"
+    ],
+    image: "/batuhan.png",
+    email: "batuhan.celik@hcc.av.tr",
+    officePhone: "0212 216 07 24"
+  },
+  {
+    name: "Zümra Miray Feyzi",
+    role: "Stajyer Avukat",
+    description: "Ticaret hukuku ve iş hukuku alanlarında dava takibi ve uyuşmazlık çözümüne yönelik çalışmalar yürütmektedir.",
+    longDescription: "Stajyer Avukat Zümra Miray Feyzi, ticaret ve şirketler hukuku ile iş hukuku alanlarında çalışmalarını sürdürmektedir.",
+    expertise: [
+      "Ticaret ve Şirketler Hukuku",
+      "İş Hukuku",
+      "Rekabet Hukuku"
+    ],
+    image: "/zumra.png",
+    email: "zumra.feyzi@hcc.av.tr",
+    officePhone: "0212 216 07 24"
+  }
+]
     },
     insights: {
       title: "Makalelerimiz",
@@ -587,6 +620,13 @@ export const siteContent: Record<Locale, SiteDictionary> = {
         messageMax: "Mesajınız en fazla 2000 karakter olabilir.",
       },
     },
+    cookieBanner: {
+      message:
+        "Bu web sitesi, deneyiminizi iyileştirmek ve temel site işlevlerini sürdürebilmek için çerezler kullanır.",
+      accept: "Kabul Et",
+      reject: "Reddet",
+      details: "Detaylar",
+    },
     footer: {
       summary:
         "HCC Avukatlık Bürosu, müvekkillerine etkin, güvenilir ve çözüm odaklı hukuki hizmetler sunmaktadır. Köklü geçmişi ve uzman kadrosu ile sürdürülebilir hukuki danışmanlık sağlamayı amaçlar.",
@@ -617,7 +657,7 @@ export const siteContent: Record<Locale, SiteDictionary> = {
       copyright: "HCC Avukatlık Bürosu. Tüm hakları saklıdır.",
       disclaimer:
         "Bu web sitesinde yer alan bilgiler yalnızca bilgilendirme amaçlıdır ve hukuki danışmanlık niteliği taşımaz.",
-      socialSoonLinkedIn: "LinkedIn bağlantısı eklenecek",
+      socialSoonLinkedIn: "LinkedIn",
       socialSoonX: "X bağlantısı eklenecek",
     },
     pages: {
@@ -752,62 +792,62 @@ export const siteContent: Record<Locale, SiteDictionary> = {
         {
           title: "Family and Inheritance Law",
           description:
-            "Comprehensive advisory and representation in inheritance planning, division matters and family law disputes.",
+            "We provide discreet and carefully structured legal counsel in family law disputes, inheritance planning, estate division and succession matters, with a strong focus on protecting personal and financial interests.",
         },
         {
           title: "Information Technology and Internet Law",
           description:
-            "Contracts and legal process management for e-commerce, digital platforms and IT law matters.",
+            "We advise on e-commerce, digital platforms, software agreements, online content liability and technology-related legal processes in line with current regulatory and commercial requirements.",
         },
         {
           title: "Litigation and Dispute Resolution",
           description:
-            "Litigation follow-up and strategic dispute resolution in commercial, administrative and private law matters.",
+            "We offer strategic representation in commercial, administrative and private law disputes, covering pre-litigation assessment, court proceedings and alternative dispute resolution processes.",
         },
         {
           title: "Intellectual Property Law",
           description:
-            "Legal services for protecting trademarks, patents and copyrights and preventing infringements.",
+            "We develop preventive and protective legal strategies for trademarks, patents, designs and copyrights, including licensing arrangements and actions against infringement.",
         },
         {
           title: "Real Estate Law",
           description:
-            "Legal advice on real estate transactions, project development and lease relationships.",
+            "We provide comprehensive legal support in real estate transactions, lease relationships, title deed matters and project development processes, with close attention to legal risk and transactional security.",
         },
         {
           title: "Enforcement and Bankruptcy Law",
           description:
-            "Efficient management of debt recovery, enforcement proceedings and bankruptcy processes.",
+            "We represent clients in debt recovery, enforcement proceedings, concordat and bankruptcy matters through an efficient and structured legal approach aimed at protecting commercial interests.",
         },
         {
           title: "Employment Law",
           description:
-            "Legal support on employer-employee relations, contracts and employment disputes.",
+            "We advise on employment contracts, workplace practices, termination procedures and labour disputes, delivering practical legal support aligned with business and workforce needs.",
         },
         {
           title: "Personal Data Protection",
           description:
-            "Compliance processes, data security and legal risk management under personal data protection law.",
+            "We assist with data protection compliance, the assessment of processing activities, privacy documentation and legal risk management relating to data security obligations.",
         },
         {
           title: "Financial and White-Collar Crimes",
           description:
-            "Defense and advisory services in financial crimes and criminal investigations.",
+            "We provide careful and technically grounded defence and advisory services in financial crime investigations and white-collar criminal matters, with due regard for legal and reputational risk.",
         },
         {
           title: "Commercial and Corporate Law",
           description:
-            "Company formations, mergers and acquisitions (M&A) and commercial agreements.",
+            "We advise on company formation, corporate restructuring, share transfers, mergers and acquisitions and the preparation of commercial agreements from a strategic business-law perspective.",
         },
         {
           title: "Consumer Law",
           description:
-            "Legal advisory services on consumer disputes and agreements.",
+            "We offer balanced and solution-oriented legal support in consumer transactions, sales and service agreements, and disputes arising from defective goods or services.",
         },
         {
           title: "Tax and Financial Services",
           description:
-            "Legal solutions for tax disputes and financial processes.",
+            "We develop technically sound legal solutions for tax disputes, financial obligations and administrative application processes, with a focus on compliance and effective representation.",
         },
       ],
     },
@@ -837,55 +877,61 @@ export const siteContent: Record<Locale, SiteDictionary> = {
           role: "Attorney at Law",
           image: "/hasan.png",
           description:
-            "Provides strategic, meticulous and solution-oriented legal counsel for individual and corporate clients.",
+            "Advises individual and corporate clients with a strategic, meticulous and solutions-focused approach across a broad range of legal matters.",
           longDescription:
-            "Hasan Can Cebeci continues his work with a strategic analysis and results-oriented representation approach in legal processes concerning both individual and corporate clients.",
-          expertise: ["Legal Advisory", "Litigation", "Strategic Process Management"],
-          email: "info@hcc.av.tr",
+            "Hasan Can Cebeci approaches legal matters with careful analysis, commercial awareness and a strong focus on practical outcomes, providing representation and advisory support tailored to the needs of both individual and corporate clients.",
+          expertise: ["Legal Advisory", "Litigation", "Strategic Case Management"],
+          email: "can.cebeci@hcc.av.tr",
+          officePhone: "0212 216 07 24",
         },
         {
           name: "Gerçek Onur Oy",
           role: "Attorney at Law",
           image: "/onur.png",
           description:
-            "Works on dispute resolution, legal advisory and effective management of litigation processes.",
+            "Works on dispute resolution, legal advisory and the effective management of contentious and non-contentious legal processes.",
           longDescription:
-            "Offers a reassuring representation style to clients through an analytical approach in dispute resolution and litigation matters.",
-          expertise: ["Dispute Resolution", "Legal Review"],
-          email: "info@hcc.av.tr",
+            "Gerçek Onur Oy supports clients with a measured and analytical approach to disputes, combining thorough legal review with clear guidance throughout negotiation, litigation and related proceedings.",
+          expertise: ["Dispute Resolution", "Legal Assessment"],
+          email: "gercek.oy@hcc.av.tr",
+          officePhone: "0212 216 07 24",
         },
         {
           name: "Osman Oy",
           role: "Attorney at Law",
           image: "/osmann.png",
           description:
-            "Adopts a systematic approach focused on identifying legal risks in advance and protecting client interests.",
+            "Applies a structured and forward-looking approach to identifying legal risk and safeguarding client interests at every stage of a matter.",
           longDescription:
-            "Specializes in risk analysis and preventive law, managing processes in a planned and disciplined manner.",
-          expertise: ["Risk Analysis", "Preventive Law"],
-          email: "info@hcc.av.tr",
+            "Osman Oy focuses on risk assessment and preventive legal strategy, helping clients manage legal processes in a disciplined, organised and commercially conscious manner.",
+          expertise: ["Risk Assessment", "Preventive Law"],
+          email: "",
+          officePhone: "0212 216 07 24",
+          startYear: "1974",
         },
         {
           name: "M. Batuhan Çelik",
           role: "Trainee Attorney",
           image: "/batuhan.png",
           description:
-            "Supports the team in legal research and file preparation tasks.",
+            "Supports the team through legal research, document review and the careful preparation of case and advisory files.",
           longDescription:
-            "Contributes through disciplined work in legal research and operational processes.",
-          expertise: ["Research", "File Preparation"],
-          email: "info@hcc.av.tr",
+            "M. Batuhan Çelik contributes to the office through disciplined legal research, attentive file preparation and reliable support across day-to-day legal and operational workflows.",
+          expertise: ["Legal Research", "File Preparation"],
+          email: "batuhan.celik@hcc.av.tr",
+          officePhone: "0212 216 07 24",
         },
         {
           name: "Zümra Miray Feyzi",
           role: "Trainee Attorney",
           image: "/zumra.png",
           description:
-            "Provides support in documentation and legal review processes.",
+            "Provides support in documentation, legal review and the organisation of internal legal processes.",
           longDescription:
-            "Contributes to the workflow through careful and organized support in office operations.",
+            "Zümra Miray Feyzi supports the office with a careful and organised working style, contributing to documentation, legal review and the smooth coordination of internal processes.",
           expertise: ["Documentation", "Legal Review"],
-          email: "info@hcc.av.tr",
+          email: "zumra.feyzi@hcc.av.tr",
+          officePhone: "0212 216 07 24",
         },
       ],
     },
@@ -991,6 +1037,13 @@ export const siteContent: Record<Locale, SiteDictionary> = {
         messageMax: "Your message must not exceed 2000 characters.",
       },
     },
+    cookieBanner: {
+      message:
+        "This website uses cookies to improve your experience and maintain essential site functionality.",
+      accept: "Accept",
+      reject: "Reject",
+      details: "Details",
+    },
     footer: {
       summary:
         "HCC Law Office provides effective, reliable and solution-oriented legal services to its clients. With its deep-rooted history and expert team, the office aims to deliver sustainable legal advisory services.",
@@ -1021,7 +1074,7 @@ export const siteContent: Record<Locale, SiteDictionary> = {
       copyright: "HCC Law Office. All rights reserved.",
       disclaimer:
         "The information provided on this website is for general information purposes only and does not constitute legal advice.",
-      socialSoonLinkedIn: "LinkedIn link will be added",
+      socialSoonLinkedIn: "LinkedIn",
       socialSoonX: "X link will be added",
     },
     pages: {

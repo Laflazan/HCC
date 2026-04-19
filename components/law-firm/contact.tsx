@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
@@ -85,9 +86,12 @@ export function Contact({ locale }: { locale: Locale }) {
   return (
     <section id="contact" className="relative overflow-hidden py-24 lg:py-32">
       <div className="absolute inset-0 -z-10">
-        <img
+        <Image
           src="/contact-bg.png"
           alt={locale === "tr" ? "HCC Avukatlık Bürosu" : "HCC Law Office"}
+          fill
+          sizes="100vw"
+          quality={70}
           className="h-full w-full scale-105 object-cover opacity-55"
         />
       </div>
@@ -97,7 +101,7 @@ export function Contact({ locale }: { locale: Locale }) {
       <div className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-gold/12 blur-[120px]" />
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] bg-[linear-gradient(0deg,transparent_24%,rgba(255,255,255,0.05)_25%,rgba(255,255,255,0.05)_26%,transparent_27%,transparent_74%,rgba(255,255,255,0.05)_75%,rgba(255,255,255,0.05)_76%,transparent_77%,transparent),linear-gradient(90deg,transparent_24%,rgba(255,255,255,0.05)_25%,rgba(255,255,255,0.05)_26%,transparent_27%,transparent_74%,rgba(255,255,255,0.05)_75%,rgba(255,255,255,0.05)_76%,transparent_77%,transparent)] bg-[length:60px_60px]" />
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-start gap-16 lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, y: 35 }}
@@ -113,7 +117,7 @@ export function Contact({ locale }: { locale: Locale }) {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
               viewport={{ once: true }}
-              className="font-serif text-4xl font-medium leading-tight tracking-tight text-white md:text-5xl"
+              className="font-serif text-3xl font-medium leading-tight tracking-tight text-white sm:text-4xl md:text-5xl"
             >
               {dictionary.contact.title}
             </motion.h2>
@@ -123,7 +127,7 @@ export function Contact({ locale }: { locale: Locale }) {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
-              className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85"
+              className="mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg"
             >
               {dictionary.contact.description}
             </motion.p>
@@ -135,13 +139,13 @@ export function Contact({ locale }: { locale: Locale }) {
               viewport={{ once: true }}
               className="mt-10 space-y-6"
             >
-              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 px-5 py-4 backdrop-blur-[2px]">
+              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 px-4 py-4 backdrop-blur-[2px] sm:px-5">
                 <MapPin className="mt-1 h-5 w-5 shrink-0 text-gold" />
                 <div>
                   <p className="text-sm uppercase tracking-[0.18em] text-white/60">
                     {dictionary.contact.addressLabel}
                   </p>
-                  <p className="mt-2 text-base leading-relaxed text-white">
+                  <p className="mt-2 break-words text-sm leading-relaxed text-white sm:text-base">
                     {dictionary.contact.address.map((line) => (
                       <span key={line} className="block">
                         {line}
@@ -151,33 +155,33 @@ export function Contact({ locale }: { locale: Locale }) {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 px-5 py-4 backdrop-blur-[2px]">
+              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 px-4 py-4 backdrop-blur-[2px] sm:px-5">
                 <Phone className="mt-1 h-5 w-5 shrink-0 text-gold" />
                 <div>
                   <p className="text-sm uppercase tracking-[0.18em] text-white/60">
                     {dictionary.contact.phoneLabel}
                   </p>
-                  <p className="mt-2 text-base text-white">{dictionary.contact.phone}</p>
+                  <p className="mt-2 break-words text-sm text-white sm:text-base">{dictionary.contact.phone}</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 px-5 py-4 backdrop-blur-[2px]">
+              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 px-4 py-4 backdrop-blur-[2px] sm:px-5">
                 <Mail className="mt-1 h-5 w-5 shrink-0 text-gold" />
                 <div>
                   <p className="text-sm uppercase tracking-[0.18em] text-white/60">
                     {dictionary.contact.emailLabel}
                   </p>
-                  <p className="mt-2 text-base text-white">{dictionary.contact.email}</p>
+                  <p className="mt-2 break-all text-sm text-white sm:text-base">{dictionary.contact.email}</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 px-5 py-4 backdrop-blur-[2px]">
+              <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-black/15 px-4 py-4 backdrop-blur-[2px] sm:px-5">
                 <Clock className="mt-1 h-5 w-5 shrink-0 text-gold" />
                 <div>
                   <p className="text-sm uppercase tracking-[0.18em] text-white/60">
                     {dictionary.contact.hoursLabel}
                   </p>
-                  <p className="mt-2 text-base text-white">{dictionary.contact.hours}</p>
+                  <p className="mt-2 break-words text-sm text-white sm:text-base">{dictionary.contact.hours}</p>
                 </div>
               </div>
             </motion.div>
@@ -188,9 +192,9 @@ export function Contact({ locale }: { locale: Locale }) {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="rounded-3xl border border-white/15 bg-white/10 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-lg lg:p-12"
+            className="rounded-3xl border border-white/15 bg-white/10 p-5 shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-lg sm:p-8 lg:p-12"
           >
-            <h3 className="font-serif text-2xl font-medium text-white md:text-3xl">
+            <h3 className="font-serif text-xl font-medium text-white sm:text-2xl md:text-3xl">
               {dictionary.contact.formTitle}
             </h3>
 
@@ -294,7 +298,7 @@ export function Contact({ locale }: { locale: Locale }) {
                 </p>
               )}
 
-              <p className="text-center text-xs leading-relaxed text-white/50">
+              <p className="text-center text-xs leading-relaxed text-white/50 break-words">
                 {dictionary.contact.consent}
               </p>
             </form>

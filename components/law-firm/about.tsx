@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getDictionary, type Locale } from "@/lib/site";
 
 export function About({ locale }: { locale: Locale }) {
@@ -5,12 +6,14 @@ export function About({ locale }: { locale: Locale }) {
 
   return (
     <section id="about" className="relative overflow-hidden py-24 lg:py-32">
-
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0 -z-10">
-        <img
+        <Image
           src="/about-bg.png"
           alt={locale === "tr" ? "Hakkımızda arka plan" : "About background"}
+          fill
+          sizes="100vw"
+          quality={70}
           className="h-full w-full scale-105 object-cover opacity-60"
         />
       </div>
@@ -24,9 +27,8 @@ export function About({ locale }: { locale: Locale }) {
       {/* SUBTLE GRID EFFECT (VERY PREMIUM TOUCH) */}
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] bg-[linear-gradient(0deg,transparent_24%,rgba(255,255,255,0.05)_25%,rgba(255,255,255,0.05)_26%,transparent_27%,transparent_74%,rgba(255,255,255,0.05)_75%,rgba(255,255,255,0.05)_76%,transparent_77%,transparent),linear-gradient(90deg,transparent_24%,rgba(255,255,255,0.05)_25%,rgba(255,255,255,0.05)_26%,transparent_27%,transparent_74%,rgba(255,255,255,0.05)_75%,rgba(255,255,255,0.05)_76%,transparent_77%,transparent)] bg-[length:60px_60px]" />
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-start gap-16 lg:grid-cols-2">
-
           {/* LEFT CONTENT */}
           <div>
             <div className="mb-8 h-px w-16 bg-gold" />
@@ -34,15 +36,13 @@ export function About({ locale }: { locale: Locale }) {
             <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight text-white md:text-5xl">
               {dictionary.about.title}
               <br />
-              <span className="text-gold">
-                {dictionary.about.highlight}
-              </span>
+              <span className="text-gold">{dictionary.about.highlight}</span>
             </h2>
 
             {dictionary.about.paragraphs.map((paragraph, index) => (
               <p
                 key={`${index}-${paragraph.slice(0, 24)}`}
-                className={`text-lg leading-relaxed text-white/85 ${
+                className={`text-base leading-relaxed text-white/85 sm:text-lg ${
                   index === 0 ? "mt-8" : "mt-6"
                 }`}
               >
@@ -64,7 +64,7 @@ export function About({ locale }: { locale: Locale }) {
           </div>
 
           {/* RIGHT CARDS */}
-          <div className="grid gap-8 sm:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2 sm:gap-8">
             {dictionary.about.stats.map((stat) => (
               <div
                 key={stat.label}
@@ -79,7 +79,6 @@ export function About({ locale }: { locale: Locale }) {
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </section>

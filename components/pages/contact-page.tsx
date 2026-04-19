@@ -7,13 +7,19 @@ export function ContactPage({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <section className="pt-40 pb-28 text-center">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="mb-6 h-px w-16 bg-gold mx-auto" />
-          <h1 className="font-serif text-4xl md:text-5xl">
+      <section className="relative overflow-hidden border-b border-border bg-background pt-32 pb-20 text-center lg:pt-36 lg:pb-24">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(200,169,106,0.10),transparent_38%)]" />
+
+        <div className="relative mx-auto max-w-4xl px-6">
+          <div className="mb-6 flex justify-center">
+            <div className="h-px w-16 bg-gold" />
+          </div>
+
+          <h1 className="font-serif text-4xl font-medium tracking-tight text-foreground md:text-5xl lg:text-6xl">
             {dictionary.metadata.contact.title}
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
             {dictionary.pages.contactIntro}
           </p>
         </div>
@@ -21,13 +27,13 @@ export function ContactPage({ locale }: { locale: Locale }) {
 
       <Contact locale={locale} />
 
-      <section className="py-24 bg-background">
+      <section className="bg-background py-24">
         <div className="mx-auto max-w-5xl px-6 text-center">
           <div className="mx-auto h-px w-16 bg-gold" />
           <h2 className="mt-8 font-serif text-3xl text-foreground">
             {dictionary.contact.preMeetingTitle}
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
             {dictionary.contact.preMeetingDescription}
           </p>
         </div>

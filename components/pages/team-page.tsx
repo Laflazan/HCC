@@ -3,15 +3,46 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Linkedin, X } from "lucide-react";
-import { getDictionary, getTeamMembers, type Locale } from "@/lib/site";
+import {
+  getDictionary,
+  getTeamMembers,
+  LINKEDIN_COMPANY_URL,
+  type Locale,
+} from "@/lib/site";
 
 type TeamPageProps = {
   locale: Locale;
 };
 
+function getTelHref(value: string) {
+  return `tel:${value.replace(/\s+/g, "")}`;
+}
+
 export function TeamPage({ locale }: TeamPageProps) {
   const dictionary = getDictionary(locale);
   const teamMembers = getTeamMembers(locale);
+  const detailLabels =
+    locale === "tr"
+      ? {
+          email: "E-posta",
+          officePhone: "Ofis Telefonu",
+          mobilePhone: "Cep Telefonu",
+          education: "Eğitim",
+          languages: "Yabancı Diller",
+          birthInfo: "Doğum Bilgisi",
+          startYear: "Başlangıç Yılı",
+          expertise: "Uzmanlık Alanları",
+        }
+      : {
+          email: "Email",
+          officePhone: "Office Phone",
+          mobilePhone: "Mobile Phone",
+          education: "Education",
+          languages: "Languages",
+          birthInfo: "Birth Information",
+          startYear: "Start Year",
+          expertise: "Practice Areas",
+        };
   const [selectedMember, setSelectedMember] = useState<
     (typeof teamMembers)[number] | null
   >(null);
@@ -37,6 +68,50 @@ export function TeamPage({ locale }: TeamPageProps) {
     };
   }, [selectedMember]);
 
+  const detailItems = selectedMember
+    ? [
+        selectedMember.email
+          ? {
+              label: detailLabels.email,
+              value: selectedMember.email,
+              href: `mailto:${selectedMember.email}`,
+            }
+          : null,
+        selectedMember.officePhone
+          ? {
+              label: detailLabels.officePhone,
+              value: selectedMember.officePhone,
+              href: getTelHref(selectedMember.officePhone),
+            }
+          : null,
+        selectedMember.mobilePhone
+          ? {
+              label: detailLabels.mobilePhone,
+              value: selectedMember.mobilePhone,
+              href: getTelHref(selectedMember.mobilePhone),
+            }
+          : null,
+        selectedMember.education
+          ? {
+              label: detailLabels.education,
+              value: selectedMember.education,
+            }
+          : null,
+        selectedMember.birthInfo
+          ? {
+              label: detailLabels.birthInfo,
+              value: selectedMember.birthInfo,
+            }
+          : null,
+        selectedMember.startYear
+          ? {
+              label: detailLabels.startYear,
+              value: selectedMember.startYear,
+            }
+          : null,
+      ].filter(Boolean)
+    : [];
+
   return (
     <div className="bg-background">
       <section className="pt-40 pb-20 text-center">
@@ -60,7 +135,7 @@ export function TeamPage({ locale }: TeamPageProps) {
               key={member.name}
               role="button"
               tabIndex={0}
-              className="group cursor-pointer overflow-hidden rounded-2xl border border-border bg-background transition hover:-translate-y-1 hover:shadow-xl"
+              className="group cursor-pointer overflow-hidden rounded-2xl border border-border bg-background transition duration-500 md:hover:-translate-y-1 md:hover:shadow-[0_20px_45px_rgba(0,0,0,0.10)]"
               onClick={() => setSelectedMember(member)}
               onKeyDown={(event) => {
                 if (event.key === "Enter" || event.key === " ") {
@@ -75,30 +150,54 @@ export function TeamPage({ locale }: TeamPageProps) {
                   src={member.image}
                   alt={member.name}
                   fill
-                  className="object-cover object-top transition duration-500 group-hover:scale-[1.03]"
+                  className="object-cover object-top transition duration-700 md:group-hover:scale-[1.04]"
                 />
 
-                <div className="absolute inset-0 bg-black/35 opacity-0 transition group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/84 via-foreground/22 via-55% to-transparent opacity-90 transition duration-500 md:group-hover:from-foreground/90 md:group-hover:via-foreground/30" />
 
-                <span
-                  aria-hidden="true"
-                  className="absolute right-4 top-4 opacity-0 transition group-hover:opacity-100"
-                  title={dictionary.team.profileLinkSoon}
+                <a
+                  href={LINKEDIN_COMPANY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(event) => event.stopPropagation()}
+                  className="absolute right-4 top-4 opacity-0 transition duration-500 md:group-hover:opacity-100"
+                  aria-label={
+                    locale === "tr"
+                      ? "LinkedIn sayfasını aç"
+                      : "Open LinkedIn page"
+                  }
+                  title="LinkedIn"
                 >
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black shadow-md">
                     <Linkedin size={16} />
                   </span>
-                </span>
+                </a>
 
-                <div className="absolute bottom-0 p-6 text-white opacity-0 transition group-hover:opacity-100">
-                  <h3 className="font-serif text-xl">{member.name}</h3>
-                  <p className="text-sm text-gold">{member.role}</p>
+                {member.expertise[0] ? (
+                  <div className="absolute left-4 top-4">
+                    <span className="rounded-full border border-gold/35 bg-gold/12 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-gold backdrop-blur-sm">
+                      {member.expertise[0]}
+                    </span>
+                  </div>
+                ) : null}
+
+                <div className="absolute bottom-0 p-6 text-white">
+                  <div className="transition duration-500 md:translate-y-2 md:group-hover:translate-y-0">
+                    <h3 className="font-serif text-[22px] tracking-tight text-white">{member.name}</h3>
+                    <p className="mt-1 text-sm text-white/70">{member.role}</p>
+                    <p className="mt-3 line-clamp-3 text-sm leading-6 text-white/82 transition duration-500 md:group-hover:text-white">
+                      {member.description}
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="p-6">
-                <h3 className="font-serif text-lg text-foreground">{member.name}</h3>
-                <p className="text-sm text-muted-foreground">{member.role}</p>
+              <div className="bg-background/96 p-6 backdrop-blur-sm">
+                <h3 className="font-serif text-xl tracking-tight text-foreground">{member.name}</h3>
+                <p className="mt-1 text-sm text-muted-foreground/90">{member.role}</p>
+                <p className="mt-3 line-clamp-2 text-sm leading-6 text-muted-foreground">
+                  {member.description}
+                </p>
               </div>
             </div>
           ))}
@@ -137,7 +236,64 @@ export function TeamPage({ locale }: TeamPageProps) {
               {selectedMember.longDescription}
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            {detailItems.length > 0 || selectedMember.languages?.length ? (
+              <div className="mt-8 grid gap-4 border-t border-border pt-6 md:grid-cols-2">
+                {detailItems.map((item) => {
+                  if (!item) {
+                    return null;
+                  }
+
+                  return (
+                    <div
+                      key={`${selectedMember.name}-${item.label}`}
+                      className="rounded-xl border border-border bg-secondary/40 p-4"
+                    >
+                      <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-gold">
+                        {item.label}
+                      </p>
+                      {item.href ? (
+                        <a
+                          href={item.href}
+                          className="mt-2 inline-flex text-sm leading-6 text-foreground transition hover:text-gold"
+                        >
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p className="mt-2 text-sm leading-6 text-foreground">
+                          {item.value}
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
+
+                {selectedMember.languages?.length ? (
+                  <div className="rounded-xl border border-border bg-secondary/40 p-4 md:col-span-2">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-gold">
+                      {detailLabels.languages}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {selectedMember.languages.map((language) => (
+                        <span
+                          key={language}
+                          className="rounded-full border border-border px-3 py-1.5 text-sm text-muted-foreground"
+                        >
+                          {language}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+
+            <div className="mt-6">
+              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-gold">
+                {detailLabels.expertise}
+              </p>
+            </div>
+
+            <div className="mt-4 flex flex-wrap gap-3">
               {selectedMember.expertise.map((item) => (
                 <span
                   key={item}

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getArticleSitemapEntries } from "@/lib/articles";
+import { getServiceSitemapEntries } from "@/lib/services";
 import { routeMap } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -20,5 +21,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
   });
 
-  return [...staticEntries, ...getArticleSitemapEntries()];
+  return [...staticEntries, ...getArticleSitemapEntries(), ...getServiceSitemapEntries()];
 }

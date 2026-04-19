@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Linkedin, Twitter } from "lucide-react";
-import { getDictionary, getLocaleFromPathname, getPath } from "@/lib/site";
+import {
+  getDictionary,
+  getLocaleFromPathname,
+  getPath,
+  LINKEDIN_COMPANY_URL,
+} from "@/lib/site";
 
 function FooterPlaceholderLink({
   label,
@@ -30,7 +35,7 @@ export function Footer() {
 
   return (
     <footer className="bg-foreground text-background">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <Link
@@ -45,13 +50,16 @@ export function Footer() {
             </p>
 
             <div className="mt-6 flex gap-4">
-              <span
-                className="text-background/60"
+              <a
+                href={LINKEDIN_COMPANY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-background/60 transition-colors hover:text-gold"
                 aria-label="LinkedIn"
                 title={dictionary.footer.socialSoonLinkedIn}
               >
                 <Linkedin className="h-5 w-5" />
-              </span>
+              </a>
 
               <span
                 className="text-background/60"
@@ -124,10 +132,10 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-background/10 pt-8 md:flex-row">
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-background/10 pt-8 text-center md:flex-row md:text-left">
           <p className="text-sm text-background/40">{dictionary.footer.copyright}</p>
 
-          <p className="text-sm text-background/40">{dictionary.footer.disclaimer}</p>
+          <p className="max-w-2xl text-sm text-background/40">{dictionary.footer.disclaimer}</p>
         </div>
       </div>
     </footer>

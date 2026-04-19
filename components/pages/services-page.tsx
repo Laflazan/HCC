@@ -9,33 +9,21 @@ export function ServicesPage({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <section className="pt-40 pb-28 text-center">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="mb-6 h-px w-16 bg-gold mx-auto" />
-          <h1 className="font-serif text-4xl md:text-5xl">
-            {dictionary.metadata.services.title}
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            {dictionary.pages.servicesIntro}
-          </p>
-        </div>
-      </section>
-
       <Services locale={locale} />
 
-      <section className="py-24 lg:py-32 bg-secondary">
+      <section className="bg-secondary py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-3">
             {dictionary.pages.servicesCards.map((card) => (
               <div
                 key={card.title}
-                className="border border-border bg-background p-8"
+                className="border border-border bg-background p-8 transition hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)]"
               >
                 <div className="h-px w-12 bg-gold" />
                 <h2 className="mt-6 font-serif text-2xl text-foreground">
                   {card.title}
                 </h2>
-                <p className="mt-4 text-muted-foreground leading-relaxed">
+                <p className="mt-4 leading-relaxed text-muted-foreground">
                   {card.description}
                 </p>
               </div>

@@ -27,19 +27,19 @@ export function Hero({ locale }: { locale: Locale }) {
       {/* gentle vignette */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_35%,rgba(0,0,0,0.05)_100%)]" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 text-center lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <div className="mb-8 flex justify-center">
             <div className="h-px w-24 bg-gold" />
           </div>
 
-          <h1 className="font-serif text-5xl font-medium leading-[1.05] tracking-tight text-foreground text-balance md:text-6xl lg:text-7xl xl:text-8xl">
+          <h1 className="font-serif text-4xl font-medium leading-[1.05] tracking-tight text-foreground text-balance sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
             {dictionary.hero.title}
             <br />
             <span className="text-gold">{dictionary.hero.highlight}</span>
           </h1>
 
-          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty md:text-xl">
+          <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg md:text-xl">
             {dictionary.hero.description}
           </p>
 
@@ -47,7 +47,7 @@ export function Hero({ locale }: { locale: Locale }) {
             <Button
               asChild
               size="lg"
-              className="h-14 bg-foreground px-8 text-base text-background shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition hover:bg-foreground/90"
+              className="h-14 w-full bg-foreground px-8 text-base text-background shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition hover:bg-foreground/90 sm:w-auto"
             >
               <Link href={getSectionHref(locale, "services")}>
                 {dictionary.hero.servicesButton}
@@ -58,7 +58,7 @@ export function Hero({ locale }: { locale: Locale }) {
               asChild
               variant="outline"
               size="lg"
-              className="h-14 border-border bg-background/60 px-8 text-base text-foreground backdrop-blur-sm transition hover:bg-muted"
+              className="h-14 w-full border-border bg-background/60 px-8 text-base text-foreground backdrop-blur-sm transition hover:bg-muted sm:w-auto"
             >
               <Link href={getSectionHref(locale, "contact")}>
                 {dictionary.hero.contactButton}

@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Navbar } from "@/components/law-firm/navbar";
 import { Footer } from "@/components/law-firm/footer";
 import { LocaleHtmlSync } from "@/components/locale-html-sync";
+import { CookieBanner } from "@/components/cookie-banner";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -73,6 +74,7 @@ export default function RootLayout({
           <main className="flex-1 pt-24">{children}</main>
           <Footer />
         </div>
+        <CookieBanner />
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>

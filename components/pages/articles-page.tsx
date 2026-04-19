@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getArticles, getDictionary, getFeaturedArticle, type Locale } from "@/lib/site";
 
@@ -23,7 +24,7 @@ export function ArticlesPage({ locale }: { locale: Locale }) {
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-gold/30 selection:text-foreground">
-      <div className="mx-auto max-w-[1440px] px-6 pb-24 pt-6 md:px-10 xl:px-12">
+      <div className="mx-auto max-w-[1440px] px-4 pb-24 pt-6 sm:px-6 md:px-10 xl:px-12">
         <header className="mb-16 border-b border-border pb-10 md:mb-20 md:pb-12">
           <div className="max-w-3xl">
             <span className="mb-4 inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.3em] text-gold">
@@ -31,7 +32,7 @@ export function ArticlesPage({ locale }: { locale: Locale }) {
               {dictionary.insights.collectionLabel}
             </span>
 
-            <h1 className="font-serif text-5xl leading-[1.02] tracking-[-0.03em] text-foreground md:text-7xl xl:text-[84px]">
+            <h1 className="font-serif text-4xl leading-[1.02] tracking-[-0.03em] text-foreground sm:text-5xl md:text-7xl xl:text-[84px]">
               {dictionary.metadata.articles.title}
             </h1>
           </div>
@@ -43,21 +44,25 @@ export function ArticlesPage({ locale }: { locale: Locale }) {
             className="group relative grid overflow-hidden rounded-2xl border border-border bg-background shadow-[0_12px_40px_rgba(0,0,0,0.06)] lg:grid-cols-[1.2fr_0.85fr]"
           >
             <div className="relative min-h-[320px] overflow-hidden md:min-h-[430px]">
-              <img
+              <Image
                 src={featuredArticle.image}
                 alt={featuredArticle.title}
-                className="h-full w-full object-cover transition-all duration-700 group-hover:scale-[1.03]"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 62vw"
+                quality={78}
+                className="object-cover transition-all duration-700 group-hover:scale-[1.03]"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
             </div>
 
-            <div className="flex flex-col justify-center px-7 py-8 md:px-10 md:py-10 xl:px-12">
+            <div className="flex min-w-0 flex-col justify-center px-6 py-8 sm:px-7 md:px-10 md:py-10 xl:px-12">
               <span className="mb-5 inline-block w-fit rounded-sm border border-gold/25 bg-gold/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-gold">
                 {featuredArticle.category}
               </span>
 
-              <h2 className="font-serif text-3xl leading-[1.12] tracking-[-0.02em] text-foreground transition-colors group-hover:text-gold md:text-[40px]">
+              <h2 className="font-serif text-[28px] leading-[1.12] tracking-[-0.02em] text-foreground transition-colors group-hover:text-gold [overflow-wrap:anywhere] sm:text-3xl md:text-[40px]">
                 {featuredArticle.title}
               </h2>
 
@@ -82,15 +87,18 @@ export function ArticlesPage({ locale }: { locale: Locale }) {
               className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-[0_10px_30px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-gold/30 hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img
+                <Image
                   src={article.image}
                   alt={article.title}
-                  className="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  quality={76}
+                  className="object-cover transition-all duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
               </div>
 
-              <div className="flex flex-1 flex-col px-6 pb-7 pt-6 md:px-7">
+              <div className="flex min-w-0 flex-1 flex-col px-5 pb-7 pt-6 sm:px-6 md:px-7">
                 <div className="mb-5 flex items-center justify-between gap-4 border-b border-border pb-4">
                   <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-gold">
                     {article.category}
@@ -100,7 +108,7 @@ export function ArticlesPage({ locale }: { locale: Locale }) {
                   </span>
                 </div>
 
-                <h3 className="font-serif text-[30px] leading-[1.16] tracking-[-0.02em] text-foreground transition-colors group-hover:text-gold">
+                <h3 className="font-serif text-2xl leading-[1.16] tracking-[-0.02em] text-foreground transition-colors group-hover:text-gold [overflow-wrap:anywhere] sm:text-[30px]">
                   {article.title}
                 </h3>
 
